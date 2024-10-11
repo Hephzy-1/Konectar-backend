@@ -34,7 +34,7 @@ export const farmerWaitlist = async (req, res, next) => {
         const { fullName, farmName, farmLocation, email, phoneNumber, typeOfProduce, farmSize, supplyFrequency, distributionChannels, mainChallenge, additionalOfferings, updateAndNotification } = value;
 
         // Check if user already exists
-        const userExist = await farm.findOne({ farmName });
+        const userExist = await farm.findOne({ where: {farmName} });
         if (userExist) {
             throw new ErrorResponse("User already exists!", 400);
         }
