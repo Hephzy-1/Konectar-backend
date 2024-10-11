@@ -10,7 +10,7 @@ export const getUsers = async (req, res) => {
         const users = await farmer.find();
 
         if (!users) {
-            return ErrorResponse({ message: `${users} not found!!`}, 500)
+            return ErrorResponse('No users not found!!', 400)
         }
 
         return res.status(200).json(users)
@@ -23,21 +23,18 @@ export const getUsers = async (req, res) => {
 export const farmerWaitlist = async (req, res, next) => {
     try {
         // Validate request body
+        console.log(req.body);
         const { error, value } = farmerDetails.validate(req.body);
 
         if (error) {
-            throw new ErrorResponse('Validation Error', 400, error.details);
+            console.log(error.message)
+            throw new ErrorResponse('Input Error', 400, error.details);
         }
 
-        const { fullName, farmName, farmLocation, email, phoneNumber, typeOfProduce, farmSize, supplyFrequency, distributionChannels, mainChallenge, additionalOfferrings, updateAndNotification } = value;
-
-        // Check if the necessary fields are present
-        if (!fullName || !farmName || !farmLocation || !email || !phoneNumber || !typeOfProduce || !farmSize || !supplyFrequency || !distributionChannels || !mainChallenge || !additionalOfferrings) {
-            throw new ErrorResponse("Missing required fields", 400);
-        }
+        const { fullName, farmName, farmLocation, email, phoneNumber, typeOfProduce, farmSize, supplyFrequency, distributionChannels, mainChallenge, additionalOfferings, updateAndNotification } = value;
 
         // Check if user already exists
-        const userExist = await farmer.findOne({ farmName });
+        const userExist = await farm.findOne({ farmName });
         if (userExist) {
             throw new ErrorResponse("User already exists!", 400);
         }
@@ -52,11 +49,12 @@ export const farmerWaitlist = async (req, res, next) => {
 
         // Create new farm object
         const newFarm = new farm({
+            farmLocation,
             farmSize,
             supplyFrequency,
             distributionChannels,
             mainChallenge,
-            additionalOfferrings,
+            additionalOfferings,
             farmerId: newFarmer.farmerId
         });
 

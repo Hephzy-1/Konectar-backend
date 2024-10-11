@@ -13,6 +13,7 @@ const app = express();
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 app.use(cookieParser());
@@ -24,6 +25,6 @@ app.get('/', (req, res) => {
 app.use('/waitlist', userRouter);
 
 //error handler
-app.use(errorHandler);
+app.use(errorHandler)
 
 export default app;
