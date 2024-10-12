@@ -5,8 +5,6 @@ import { sequelize } from '../config/db.js'
 const farmer = sequelize.define('User', {
   farmerId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true,
     autoIncrement: true,  // auto-increments farmer id
     primaryKey: true      // primaryKey
   },
