@@ -7,10 +7,10 @@ export const farmerDetails = Joi.object({
   email: Joi.string().email().trim().required(),
   
   phoneNumber: Joi.string()
-    .pattern(/^\+234[789][01]\d{8}$|^0[789][01]\d{8}$/)
+    .pattern(/^\+?[1-9]\d{1,14}$/)
     .required()
     .messages({
-      'string.pattern.base': 'Phone number must be a valid Nigerian number (e.g., +2348012345678 or 08012345678)'
+      'string.pattern.base': 'Phone number must be a valid international number'
     }),
   
   typeOfProduce: Joi.string().required(), 

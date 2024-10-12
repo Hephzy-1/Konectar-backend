@@ -29,7 +29,6 @@ const farmer = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      is: /^(\+234|0)[789][01]\d{8}$/,  // Nigerian phone number validation
       len: [10, 14],  // Allows a length of 10 (local) to 14 (with international format)
     }
   },  
