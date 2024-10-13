@@ -9,7 +9,7 @@ const produce = sequelize.define('produce', {
     primaryKey: true      // primaryKey
   },
   typeOfProduce: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.STRING,
     allowNull: false
   },
   farmId: {

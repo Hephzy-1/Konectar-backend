@@ -13,7 +13,7 @@ export const farmerWaitlist = async (req, res, next) => {
         // Validate request body using Joi schema
         const { error, value } = farmerDetails.validate(req.body);
         if (error) {
-            console.log("Validation error:", error.details);
+            console.log("Validation error:", error);
             return res.status(400).json({ message: 'Validation error', details: error.details });
         }
 
@@ -22,7 +22,7 @@ export const farmerWaitlist = async (req, res, next) => {
         // Check if farmer with email already exists
         const userExist = await farmer.findOne({ where: { email } });
         if (userExist) {
-            return res.status(400).json({ message: "Farmer already exists!" });
+            return res.status(400).json({ message: "Farmer already exists!"});
         }
 
         // Create and save new farmer
@@ -30,20 +30,21 @@ export const farmerWaitlist = async (req, res, next) => {
             fullName,
             email,
             phoneNumber,
-            notifications: updateAndNotification // Assuming this is for notification settings
+            notifications: updateAndNotification 
         });
 
         // Create and save new farm
         const newFarm = await farm.create({
             farmName,
-            farmLocation,
-            farmSize,
+            location: farmLocation,
+            size: farmSize,
             supplyFrequency,
             distributionChannels,
             mainChallenge,
             additionalOfferings,
             farmerId: newFarmer.farmerId  // Reference the new farmer's ID
         });
+        console.log(newFarm);
 
         // Create and save new produce
         const newProduce = await produce.create({
@@ -52,6 +53,7 @@ export const farmerWaitlist = async (req, res, next) => {
         });
 
         // Send a success response with farmer, farm, and produce details
+        console.log(newFarm, newFarmer, newProduce);
         res.status(201).redirect(config.COMMUNITY_LINK)
 
     } catch (error) {

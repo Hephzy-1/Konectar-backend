@@ -27,7 +27,7 @@ const farmer = sequelize.define('Farmer', {
     type: DataTypes.STRING,
     allowNull: false,
     validate: {
-      len: [10, 14],  // Allows a length of 10 (local) to 14 (with international format)
+      len: [10, 14],  // Allows a length of 14 (with international format)
     }
   },  
   notifications: {

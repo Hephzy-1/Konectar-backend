@@ -18,11 +18,11 @@ const farm = sequelize.define('farm', {
       this.setDataValue('farmName', value.trim());  // Trims the whitespace for farmName
     },
   },
-  farmLocation: {
+  location: {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  farmSize: {
+  size: {
     type: DataTypes.ENUM('less than 2.5 acres', '2.5-7.5 acres', '7.5-12 acres', 'More than 20 acres'),
     allowNull: false
   },
