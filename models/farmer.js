@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import { sequelize } from '../config/db.js'
 
 // Define the waitlist model (User)
-const farmer = sequelize.define('User', {
+const farmer = sequelize.define('Farmer', {
   farmerId: {
     type: DataTypes.INTEGER,
     autoIncrement: true,  // auto-increments farmer id

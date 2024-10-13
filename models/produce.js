@@ -5,8 +5,6 @@ import farm from './farm.js';
 const produce = sequelize.define('produce', {
   produceId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true,
     autoIncrement: true,  // auto-increments farmer id
     primaryKey: true      // primaryKey
   },

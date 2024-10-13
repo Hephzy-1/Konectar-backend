@@ -7,8 +7,6 @@ import farmer from './farmer.js';
 const farm = sequelize.define('farm', {
   farmId: {
     type: DataTypes.INTEGER,
-    allowNull: false,
-    unique: true,
     autoIncrement: true,  // auto-increments farm id
     primaryKey: true      // primaryKey
   },
@@ -34,20 +32,18 @@ const farm = sequelize.define('farm', {
   },
   distributionChannel: {
     type: DataTypes.ENUM('local market', 'wholesalers', 'Direct sales'),
-    allowNull: false
   },
   mainChallenges: {
     type: DataTypes.TEXT,
-    allowNull: false
   }, 
   additionalOfferings: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    type: DataTypes.STRING,
     allowNull: false
   },
   farmerId: {
     type: DataTypes.INTEGER,
     references: {
-      model: farmer,    // Reference to farmer model (User)
+      model: farmer,    // Reference to farmer model (Farmer)
       key: 'farmerId'     // Reference the farmerId field
     },
     allowNull: false
